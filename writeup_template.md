@@ -18,6 +18,7 @@
 [image13]: ./misc_images/thetacalc.jpg
 [image14]: ./misc_images/R3_6.png
 [image15]: ./misc_images/theta456.png
+[image16]: ./misc_images/kinematics_complete.png
 
 ### Writeup / README  
 
