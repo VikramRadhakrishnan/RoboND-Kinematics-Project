@@ -17,8 +17,9 @@
 [image12]: ./misc_images/codeblock.png
 [image13]: ./misc_images/thetacalc.jpg
 [image14]: ./misc_images/R3_6.png
-[image15]: ./misc_images/theta456.png
-[image16]: ./misc_images/kinematics_complete.png
+[image15]: ./misc_images/R3_6_from_transforms.png
+
+[image17]: ./misc_images/kinematics_complete.png
 
 ### Writeup / README  
 
@@ -70,15 +71,28 @@ And to implement this in Python code, I used the following snippet of code, take
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 The procedure is as follows:  
-First we calculate the location of the wrist center (WC), using the position and orientation of the gripper, and the length of the last link. In the x-y plane, the wrist center is located at (WCx, WCy). With the location of the wrist center, we calculate theta1 as the inverse tangent of (Wcy / WCx).  
+First we calculate the location of the wrist center (WC), using the position and orientation of the gripper, and the length of the last link. Here, the wrist center can be found by performing a translation of 0.303 to go from the gripper to the WC. In the x-y plane, the wrist center is located at (WCx, WCy). With the location of the wrist center, we calculate theta1 as the inverse tangent of (Wcy / WCx).  
 To calculate theta2 and theta3, we construct the traingle made by joint 2, joint 3, and the wrist center. The sides of this triangle are calculated from the values in the URDF and Pythagoras theorem. The angles of this traingle are calculated from the sides, using the cosine rule. Then, theta2 and theta3 can be found using simple geometry. My calculations are included in the following image:
 ![alt text][image13]  
 
 For angles theta4, theta5, theta6, i.e. for the inverse orientation, we can peform the following calculation. We have the matrix R0_6 from the individual transformation matrices, and we have R0_3 from our calculation of theta1, theta2, theta3. This can give us R3_6 as follows (screenshot captured from the Udacity classroom lesson):  
 ![alt text][image14]  
 
-And then we calculate theta4, theta5, theta6 as follows (screenshot captured from the Udacity classroom lesson):  
-![alt text][image15]  
+Now since the inverse of R0_3 is also the transpose of R0_3, we simply calculate R0_3 transposed * Rrpy = R3_6. We can calculate analytically the expressions for each term in R3_6 by multiplying the transformation matrices to go from joint 3 to the end effector. Let's write this out in full:  
+
+```
+    print("This is R3_6 from the homogenous transformation matrices\n")
+    R3_6m = simplify(T3_4[0:3, 0:3] * T4_5[0:3, 0:3] * T5_6[0:3, 0:3] * T6_EE[0:3, 0:3])
+    print(R3_6m)
+```
+
+Here's what this gives us:  
+![alt text][image15] 
+
+Comparing these two matrices, we can use certain terms in both to solve for theta4, theta5, and theta6 separately. Let's write those terms out, with respect to the matrix R3_6.  
+![alt text][image16]  
+
+The calculations show two possible solutions for theta5, as there are two roots to the equation to solve for atan2(theta5). Let's expand what this means for theta4 and theta6. Suppose we pick the negative root, then sin(theta4) must be less than zero, in which case, theta4 and theta6 take on the first set of expressions in the diagram above. If we pick the positive root, then sin(theta5) is positive, which means theta4 and theta6 must take on the second set of expressions. I selected the positive root for this simulation and ran the IK_debug script with the corresponding for theta4, theta5, and theta6. This gave me good results, so I used this solution in the IK_server.py code.
 
 ### Project Implementation
 
@@ -86,5 +100,5 @@ And then we calculate theta4, theta5, theta6 as follows (screenshot captured fro
 
 The code that I implemented was based on the calculations I showed above, and heavily inspired by the project walkthrough. The one change I made was to use the transpose of R0_3 instead of the inverse, because based on discussions in the Slack forum, I learned that this resulted in better performance by the robot. To improve this project further, I would start by making more precise calculations with higher decimal point accuracy.  
 A screenshot of the completed pick and place operation using the IK_server.py code is attached below:  
-![alt text][image16] 
+![alt text][image17] 
 
