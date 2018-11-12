@@ -41,17 +41,17 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
 For each joint, I used the values from the DH parameter table above to create the corresponding transformation matrix. This was based on the fact that the homogenous transformation matrix going from frame i-1 to frame i is given by the equation:
-![alt text][image2]
+![alt text][image2]  
 ![alt text][image3]
 
 So, going link by link from link 0 to the end effector, we get the following homogenous transformation matrixes:  
 (Note: these matrixes were generated using [this online latex editor](https://www.codecogs.com/latex/eqneditor.php))
-![alt text][image4]
-![alt text][image5]
-![alt text][image6]
-![alt text][image7]
-![alt text][image8]
-![alt text][image9]
+![alt text][image4]  
+![alt text][image5]  
+![alt text][image6]  
+![alt text][image7]  
+![alt text][image8]  
+![alt text][image9]  
 
 For the transformation from the 6th joint to the gripper, we need to account for the difference between the orientation of the gripper link as defined in the URDF, and its DH convention, which means we include a body fixed rotation about the Z axis, and then the Y axis. This gives us:
 ![alt text][image10]
