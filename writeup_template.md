@@ -84,5 +84,7 @@ And then we calculate theta4, theta5, theta6 as follows (screenshot captured fro
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
 
-The code that I implemented was based on the calculations I showed above, and heavily inspired by the project walkthrough. The one change I made was to use the transpose of R0_3 instead of the inverse, because based on discussions in the Slack forum, I learned that this resulted in better performance by the robot. To improve this project further, I would start by making more precise calculations with higher decimal point accuracy.
+The code that I implemented was based on the calculations I showed above, and heavily inspired by the project walkthrough. The one change I made was to use the transpose of R0_3 instead of the inverse, because based on discussions in the Slack forum, I learned that this resulted in better performance by the robot. To improve this project further, I would start by making more precise calculations with higher decimal point accuracy.  
+A screenshot of the completed pick and place operation using the IK_server.py code is attached below:  
+![alt text][image16] 
 
