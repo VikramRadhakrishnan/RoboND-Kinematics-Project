@@ -45,7 +45,7 @@ For each joint, I used the values from the DH parameter table above to create th
 ![alt text][image3]
 
 So, going link by link from link 0 to the end effector, we get the following homogenous transformation matrixes:  
-(Note: these matrixes were generated using [this online latex editor](https://www.codecogs.com/latex/eqneditor.php))
+(Note: these matrixes were generated using [this online latex editor](https://www.codecogs.com/latex/eqneditor.php))  
 ![alt text][image4]  
 ![alt text][image5]  
 ![alt text][image6]  
