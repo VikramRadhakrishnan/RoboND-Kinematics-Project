@@ -14,6 +14,10 @@
 [image9]: ./misc_images/T5_6.jpg
 [image10]: ./misc_images/T6_EE.jpg
 [image11]: ./misc_images/T0_EE.jpg
+[image12]: ./misc_images/codeblock.png
+[image13]: ./misc_images/thetacalc.jpg
+[image14]: ./misc_images/R3_6.png
+[image15]: ./misc_images/theta456.png
 
 ### Writeup / README  
 
@@ -59,16 +63,25 @@ For the transformation from the 6th joint to the gripper, we need to account for
 The complete transformation from the base link to the end effector is then given by:
 ![alt text][image11]
 
+And to implement this in Python code, I used the following snippet of code, taken directly from the Udacity classroom video:
+![alt text][image12]  
+
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
+The procedure is as follows:  
+First we calculate the location of the wrist center (WC), using the position and orientation of the gripper, and the length of the last link. In the x-y plane, the wrist center is located at (WCx, WCy). With the location of the wrist center, we calculate theta1 as the inverse tangent of (Wcy / WCx).  
+To calculate theta2 and theta3, we construct the traingle made by joint 2, joint 3, and the wrist center. The sides of this triangle are calculated from the values in the URDF and Pythagoras theorem. The angles of this traingle are calculated from the sides, using the cosine rule. Then, theta2 and theta3 can be found using simple geometry. My calculations are included in the following image:
+![alt text][image13]  
 
-And here's where you can draw out and show your math for the derivation of your theta angles. 
+For angles theta4, theta5, theta6, i.e. for the inverse orientation, we can peform the following calculation. We have the matrix R0_6 from the individual transformation matrices, and we have R0_3 from our calculation of theta1, theta2, theta3. This can give us R3_6 as follows (screenshot captured from the Udacity classroom lesson):  
+![alt text][image14]  
+
+And then we calculate theta4, theta5, theta6 as follows (screenshot captured from the Udacity classroom lesson):  
+![alt text][image15]  
 
 ### Project Implementation
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
 
-
-Here I'll talk about the code, what techniques I used, what worked and why, where the implementation might fail and how I might improve it if I were going to pursue this project further.  
-
+The code that I implemented was based on the calculations I showed above, and heavily inspired by the project walkthrough. The one change I made was to use the transpose of R0_3 instead of the inverse, because based on discussions in the Slack forum, I learned that this resulted in better performance by the robot. To improve this project further, I would start by making more precise calculations with higher decimal point accuracy.
 
