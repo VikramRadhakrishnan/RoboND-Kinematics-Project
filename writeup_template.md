@@ -89,7 +89,7 @@ Now since the inverse of R0_3 is also the transpose of R0_3, we simply calculate
 Here's what this gives us:  
 ![alt text][image15] 
 
-Comparing these two matrices, we can use certain terms in both to solve for theta4, theta5, and theta6 separately. Let's write those terms out, with respect to the matrix R3_6.  
+Looking at this matrix, we can use certain terms in it to solve for theta4, theta5, and theta6 separately. Let's write those terms out, with respect to the matrix R3_6.  
 ![alt text][image16]  
 
 The calculations show two possible solutions for theta5, as there are two roots to the equation to solve for atan2(theta5). Let's expand what this means for theta4 and theta6. Suppose we pick the negative root, then sin(theta4) must be less than zero, in which case, theta4 and theta6 take on the first set of expressions in the diagram above. If we pick the positive root, then sin(theta5) is positive, which means theta4 and theta6 must take on the second set of expressions. I selected the positive root for this simulation and ran the IK_debug script with the corresponding for theta4, theta5, and theta6. This gave me good results, so I used this solution in the IK_server.py code.
