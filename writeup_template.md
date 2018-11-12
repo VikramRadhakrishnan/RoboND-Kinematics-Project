@@ -4,8 +4,16 @@
 [//]: # (Image References)
 
 [image1]: ./misc_images/sketch.jpg
-[image2]: ./misc_images/misc3.png
-[image3]: ./misc_images/misc2.png
+[image2]: ./misc_images/eq2.png
+[image3]: ./misc_images/image-3.png
+[image4]: ./misc_images/T0_1.jpg
+[image5]: ./misc_images/T1_2.jpg
+[image6]: ./misc_images/T2_3.jpg
+[image7]: ./misc_images/T3_4.jpg
+[image8]: ./misc_images/T4_5.jpg
+[image9]: ./misc_images/T5_6.jpg
+[image10]: ./misc_images/T6_EE.jpg
+[image11]: ./misc_images/T0_EE.jpg
 
 ### Writeup / README  
 
@@ -32,15 +40,29 @@ Links | alpha(i-1) | a(i-1) | d(i-1) | theta(i)
 
 #### 2. Using the DH parameter table you derived earlier, create individual transformation matrices about each joint. In addition, also generate a generalized homogeneous transform between base_link and gripper_link using only end-effector(gripper) pose.
 
-For each joint, I used the values from the DH parameter table above to create the corresponding transformation matrix.
+For each joint, I used the values from the DH parameter table above to create the corresponding transformation matrix. This was based on the fact that the homogenous transformation matrix going from frame i-1 to frame i is given by the equation:
+![alt text][image2]
+![alt text][image3]
 
+So, going link by link from link 0 to the end effector, we get the following homogenous transformation matrixes:  
+(Note: these matrixes were generated using [this online latex editor](https://www.codecogs.com/latex/eqneditor.php))
+![alt text][image4]
+![alt text][image5]
+![alt text][image6]
+![alt text][image7]
+![alt text][image8]
+![alt text][image9]
+
+For the transformation from the 6th joint to the gripper, we need to account for the difference between the orientation of the gripper link as defined in the URDF, and its DH convention, which means we include a body fixed rotation about the Z axis, and then the Y axis. This gives us:
+![alt text][image10]
+
+The complete transformation from the base link to the end effector is then given by:
+![alt text][image11]
 
 
 #### 3. Decouple Inverse Kinematics problem into Inverse Position Kinematics and inverse Orientation Kinematics; doing so derive the equations to calculate all individual joint angles.
 
 And here's where you can draw out and show your math for the derivation of your theta angles. 
-
-![alt text][image2]
 
 ### Project Implementation
 
@@ -48,9 +70,5 @@ And here's where you can draw out and show your math for the derivation of your 
 
 
 Here I'll talk about the code, what techniques I used, what worked and why, where the implementation might fail and how I might improve it if I were going to pursue this project further.  
-
-
-And just for fun, another example image:
-![alt text][image3]
 
 
