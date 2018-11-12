@@ -15,10 +15,10 @@
 [image10]: ./misc_images/T6_EE.jpg
 [image11]: ./misc_images/T0_EE.jpg
 [image12]: ./misc_images/codeblock.png
-[image13]: ./misc_images/thetacalc.jpg
+[image13]: ./misc_images/theta123.jpg
 [image14]: ./misc_images/R3_6.png
 [image15]: ./misc_images/R3_6_from_transforms.png
-
+[image16]: ./misc_images/theta456.jpg
 [image17]: ./misc_images/kinematics_complete.png
 
 ### Writeup / README  
