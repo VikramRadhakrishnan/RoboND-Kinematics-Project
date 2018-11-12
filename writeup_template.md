@@ -98,7 +98,7 @@ The calculations show two possible solutions for theta5, as there are two roots 
 
 #### 1. Fill in the `IK_server.py` file with properly commented python code for calculating Inverse Kinematics based on previously performed Kinematic Analysis. Your code must guide the robot to successfully complete 8/10 pick and place cycles. Briefly discuss the code you implemented and your results. 
 
-The code that I implemented was based on the calculations I showed above, and heavily inspired by the project walkthrough. The one change I made was to use the transpose of R0_3 instead of the inverse, because based on discussions in the Slack forum, I learned that this resulted in better performance by the robot. To improve this project further, I would start by making more precise calculations with higher decimal point accuracy.  
-A screenshot of the completed pick and place operation using the IK_server.py code is attached below:  
+The code that I implemented was based on the calculations I showed above, and heavily inspired by the project walkthrough. The one change I made was to use the transpose of R0_3 instead of the inverse, because based on discussions in the Slack forum, I learned that this resulted in better performance by the robot. To improve this project further, I would start by making more precise calculations with higher decimal point accuracy. I would also make use of [Lambdify](http://docs.sympy.org/latest/modules/utilities/lambdify.html) to try and speed up the performance, rather than using subs and evalf.
+A screenshot of the completed pick and place operation using the IK_server.py code is attached below. As can be seen, the pick and place operation succeeds at least 8 times out of 10:  
 ![alt text][image17] 
 
